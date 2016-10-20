@@ -28,28 +28,40 @@ AppAsset::register($this);
             <div>
                 <img src="<?= Yii::getAlias('@web') ?>/img/avengers.jpg" class="img-responsive" alt="header" >
             </div>
-            
+
 
             <?php
             NavBar::begin([
                 'brandLabel' => '<span class="glyphicon glyphicon-leaf"></span> Web site ของฉัน',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-default',  //navbar-fixed-top
+                    'class' => 'navbar-default', //navbar-fixed-top
                 ],
             ]);
-            
-            $setting=[
-               ['label' => 'สถานะคอมพิวเตอร์', 'url' => ['/comstatus']], 
+
+            $setting = [
+                ['label' => 'สถานะคอมพิวเตอร์', 'url' => ['/comstatus']],
+                ['label' => 'ประเภทคอมพิวเตอร์', 'url' => ['/com-type']],
             ];
-            
+
+            $regist = [
+                ['label' => 'ทะเบียนคอมพิวเตอร์', 'url' => ['/com']],
+            ];
+
+            $report = [
+                ['label' => 'รายงานคอมพิวเตอร์', 'url' => ['/reportcomtype']],
+                ['label' => 'รายงานปัญหาคอมพิวเตอร์', 'url' => ['/reportcomservice']],
+                ['label' => 'กราฟสรุปจำนวนคอมพิวเตอร์', 'url' => ['/chartcom']],
+            ];
+
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'encodeLabels' => false,
                 'items' => [
                     ['label' => '<span class="glyphicon glyphicon-home"></span> หน้าแรก', 'url' => ['/site/index']],
-                    ['label' => '<span class="glyphicon glyphicon-headphones"></span> เกี่ยวกับ', 'url' => ['/site/about']],
-                    ['label' => 'ติดต่อ', 'url' => ['/site/contact']],
+                    ['label' => 'ลงทะเบียน', 'items' => $regist],
+                    ['label' => 'ระบบรายงาน', 'items' => $report],
                     ['label' => 'ทดสอบ1', 'url' => ['/first1/index']],
                     ['label' => 'ตั้งค่าระบบ', 'items' => $setting],
                     Yii::$app->user->isGuest ? (
@@ -69,11 +81,11 @@ AppAsset::register($this);
             ?>
 
             <div class="container">
-<?=
-Breadcrumbs::widget([
-    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-])
-?>
+                <?=
+                Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ])
+                ?>
                 <?= $content ?>
             </div>
         </div>
